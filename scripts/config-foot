@@ -1,0 +1,5 @@
+font=JetBrains Mono, monospace:size=20
+dpi-aware=yes
+
+[scrollback]
+lines=10000
