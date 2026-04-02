@@ -2,10 +2,6 @@
 
 exec 2> >(tee -a setup.log)
 
-setup_usb_tethering() {
-    for iface in /sys/class/net/enx*; do iface=${iface##*/}; sudo ip link set "$iface" up && sudo dhcpcd "$iface"; done
-}
-
 apt_system_refresh() {
     sudo apt-get update && sudo apt-get dist-upgrade -y && sudo apt-get autoremove --purge -y && sudo apt-get autoclean
 }
@@ -15,69 +11,11 @@ enable_i386_architecture() {
 }
 
 install_base_packages() {
-    sudo apt-get install -y sway foot waybar mako-notifier thunar swaybg xwayland xdg-desktop-portal-wlr wl-clipboard brightnessctl grim slurp gammastep intel-gpu-tools firmware-intel-misc firmware-intel-sound pipewire pipewire-alsa pipewire-pulse pipewire-jack wireplumber gstreamer1.0-pipewire obs-pipewire-audio-capture vlc-plugin-pipewire lxpolkit bluez bluez-alsa-utils bluez-cups bluez-hcidump bluez-meshd bluez-obexd bluez-tools bluez-firmware python3-bluez blueman jq tlp tlp-rdw xdg-desktop-portal xdg-desktop-portal-gtk libnotify-bin geoclue-2.0 mesa-utils fuzzel gir1.2-polkit-1.0 libpolkit-agent-1-0 libpolkit-gobject-1-0 libpolkit-qt5-1-1 libpolkit-qt6-1-1 polkitd pkexec tree curl wget virt-manager libxcb-xinerama0 libxcb-cursor0 libnss3 flatpak git python3 python3-venv tcpdump ffmpeg zstd fonts-noto-core fonts-atkinson-hyperlegible fonts-inter fonts-jetbrains-mono fonts-noto-color-emoji adb nodejs npm pypy3 pypy3-venv gh foot-extra-terminfo foot-terminfo swayidle swaylock swayimg swayosd thunar-data libthunarx-3-0 thunar-archive-plugin thunar-volman thunar-media-tags-plugin thunar-gtkhash thunar-font-manager thunar-vcs-plugin rabbitvcs-thunar grimshot libnotify4 flatpak-xdg-utils libflatpak0 libglib2.0-bin
+    sudo apt-get install foot foot-terminfo foot-extra-terminfo sway sway-backgrounds swaybg swayidle swayimg swaylock swayosd libnotify-bin libnotify4 waybar mako-notifier thunar libthunarx-3-0 thunar-archive-plugin thunar-data thunar-font-manager thunar-gtkhash thunar-media-tags-plugin thunar-volman wl-clipboard grim slurp grimshot brightnessctl gammastep xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-wlr pipewire gstreamer1.0-pipewire libpipewire-0.3-0t64 libpipewire-0.3-common libpipewire-0.3-modules libpipewire-0.3-modules-x11 obs-pipewire-audio-capture pipewire-alsa pipewire-audio pipewire-audio-client-libraries pipewire-bin pipewire-jack pipewire-libcamera pipewire-pulse pipewire-v4l2 vlc-plugin-pipewire libwireplumber-0.5-0 wireplumber bluez bluez-alsa-utils bluez-firmware bluez-obexd bluez-tools libasound2-plugin-bluez python3-bluez tlp tlp-rdw geoclue-2.0 firmware-intel-misc firmware-intel-sound firmware-intel-graphics tree curl wget jq tcpdump ffmpeg zstd git python3 python3-venv pypy3 pypy3-venv nodejs npm gh adb virt-manager fonts-noto-core fonts-noto-color-emoji fonts-atkinson-hyperlegible fonts-inter fonts-jetbrains-mono firmware-intel-graphics firmware-intel-misc firmware-intel-sound intel-media-va-driver intel-media-va-driver-non-free intel-microcode intel-hdcp libxcb-xinerama0 libxcb-cursor0 libnss3 flatpak flatpak-xdg-utils gir1.2-flatpak-1.0 libflatpak0 lxpolkit polkitd
 }
 
 install_network_manager() {
-    sudo apt-get install -y network-manager network-manager-gnome network-manager-config-connectivity-debian network-manager-l10n network-manager-applet network-manager-iwd python3-networkmanager libproxy1-plugin-networkmanager
-}
-
-setup_sway_environment_and_autostart() {
-    PROFILE="$HOME/.profile"
-
-    SWAY_BLOCK='
-# Sway environment and Wayland overrides
-export XDG_CURRENT_DESKTOP=sway:wlroots
-export _JAVA_AWT_WM_NONREPARENTING=1
-export MOZ_DBUS_REMOTE=1
-
-# Autostart Sway on login
-if [ "$(tty)" = "/dev/tty1" ]; then
-    read -p "Start Sway? [Y/n]: " -r
-    if [[ -z "$REPLY" || "$REPLY" =~ ^[Yy]$ ]]; then
-        exec dbus-run-session sway
-    fi
-fi
-'
-
-    grep -q "Start Sway?" "$PROFILE" 2>/dev/null || \
-    echo "$SWAY_BLOCK" >> "$PROFILE"
-}
-
-# export ELECTRON_OZONE_PLATFORM_HINT=auto
-
-configure_wayland_flags() {
-    mkdir -p ~/.config
-    echo "--ozone-platform-hint=auto" > ~/.config/brave-flags.conf
-}
-
-configure_gtk_font_rendering() {
-    gsettings set org.gnome.desktop.interface font-antialiasing 'rgba'; gsettings set org.gnome.desktop.interface font-hinting 'slight'; gsettings set org.gnome.desktop.interface font-rgba-order 'rgb'
-}
-
-
-configure_gtk_font_settings() {
-    mkdir -p ~/.config/fontconfig ~/.config/gtk-3.0 ~/.config/gtk-4.0 && cp -f ./config-font ~/.config/fontconfig/fonts.conf && cp -f ./setting-gtk ~/.config/gtk-3.0/settings.ini && cp -f ./setting-gtk ~/.config/gtk-4.0/settings.ini
-}
-
-configure_mako_notifications() {
-    mkdir -p ~/.config/mako && cp -f ./config-mako ~/.config/mako/config
-}
-
-configure_foot_terminal() {
-    mkdir -p ~/.config/foot && cp -f ./config-foot ~/.config/foot/foot.ini
-}
-
-configure_gammastep() {
-    mkdir -p ~/.config/gammastep && cp -f ./config-gammastep ~/.config/gammastep/config.ini
-}
-
-configure_fuzzel_launcher() {
-    mkdir -p ~/.config/fuzzel && cp -f ./config-fuzzel ~/.config/fuzzel/fuzzel.ini
-}
-
-configure_sway() {
-    mkdir -p ~/.config/sway && cp -f ./config-sway ~/.config/sway/config
+    sudo apt-get install network-manager network-manager-applet network-manager-openvpn network-manager-iwd network-manager-config-connectivity-debian libproxy1-plugin-networkmanager python3-networkmanager
 }
 
 restore_grub_configuration() {
@@ -144,82 +82,27 @@ enable_system_services() {
     sudo systemctl enable NetworkManager bluetooth tlp
 }
 
-create_cache_directory() {
-    mkdir -p ~/.cache
-}
 
-configure_system_locale() {
-    sudo update-locale LANG=en_IN.UTF-8
-}
-
-create_sl_directory() {
-    mkdir -p "$HOME/Pictures/Screenshots (Laptop)"
-}
-
-configure_grim() {
-    mkdir -p ~/.local/bin && cp -f ./config-grim ~/.local/bin/grim && chmod +x ~/.local/bin/grim
-}
-
-fix_delay() {
-mkdir -p ~/.config/xdg-desktop-portal
-cat <<EOF > ~/.config/xdg-desktop-portal/sway-portals.conf
-[preferred]
-default=wlr;gtk
-EOF
-}
-
-# setup_usb_tethering
 
 enable_i386_architecture
-
-apt_system_refresh
-
 install_local_deb_packages
-
+apt_system_refresh
 install_base_packages
-
 add_repo_brave_browser
 add_repo_vscodium
 add_repo_syncthing
 add_repo_flathub
-
 apt_system_refresh
-
 install_additional_packages
 install_flatpak_packages
 
-setup_virtualization
-
-create_cache_directory
-# create_sl_directory
-
-# setup_sway_environment_and_autostart
-
-# configure_gtk_font_rendering
-# configure_gtk_font_settings
-configure_mako_notifications
-configure_foot_terminal
-# configure_gammastep
-configure_fuzzel_launcher
-configure_sway
-# configure_grim
-
-restore_grub_configuration
-restore_tlp_configuration
-restore_vscodium_configuration
-
-install_battery_alert_service
-setup_git_configuration
-configure_system_locale
-
 install_anki_package
-
-install_network_manager
-
-enable_system_services
-
-# fix_delay
-
-# configure_wayland_flags
-
+setup_virtualization
+restore_vscodium_configuration
+restore_tlp_configuration
+restore_grub_configuration
+install_battery_alert_service
 rebuild_font_cache
+setup_git_configuration
+install_network_manager
+enable_system_services
