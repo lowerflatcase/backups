@@ -11,7 +11,7 @@ enable_i386_architecture() {
 }
 
 install_base_packages() {
-    sudo apt-get install foot foot-terminfo foot-extra-terminfo sway sway-backgrounds swaybg swayidle swayimg swaylock swayosd libnotify-bin libnotify4 waybar mako-notifier thunar libthunarx-3-0 thunar-archive-plugin thunar-data thunar-font-manager thunar-gtkhash thunar-media-tags-plugin thunar-volman wl-clipboard grim slurp grimshot brightnessctl gammastep xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-wlr pipewire gstreamer1.0-pipewire libpipewire-0.3-0t64 libpipewire-0.3-common libpipewire-0.3-modules libpipewire-0.3-modules-x11 obs-pipewire-audio-capture pipewire-alsa pipewire-audio pipewire-audio-client-libraries pipewire-bin pipewire-jack pipewire-libcamera pipewire-pulse pipewire-v4l2 vlc-plugin-pipewire libwireplumber-0.5-0 wireplumber bluez bluez-alsa-utils bluez-firmware bluez-obexd bluez-tools libasound2-plugin-bluez python3-bluez tlp tlp-rdw geoclue-2.0 tree curl wget jq tcpdump ffmpeg zstd git python3 python3-venv pypy3 pypy3-venv nodejs npm gh adb virt-manager fonts-noto-core fonts-noto-color-emoji fonts-atkinson-hyperlegible fonts-inter fonts-jetbrains-mono firmware-intel-graphics firmware-intel-misc firmware-intel-sound intel-media-va-driver intel-media-va-driver-non-free intel-microcode intel-hdcp libxcb-xinerama0 libxcb-cursor0 libnss3 flatpak flatpak-xdg-utils gir1.2-flatpak-1.0 libflatpak0 lxpolkit polkitd blueman
+    sudo apt-get install foot foot-terminfo foot-extra-terminfo sway sway-backgrounds swaybg swayidle swayimg swaylock swayosd libnotify-bin libnotify4 waybar mako-notifier thunar libthunarx-3-0 thunar-archive-plugin thunar-data thunar-font-manager thunar-gtkhash thunar-media-tags-plugin thunar-volman wl-clipboard grim slurp grimshot brightnessctl gammastep xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-wlr pipewire gstreamer1.0-pipewire libpipewire-0.3-0t64 libpipewire-0.3-common libpipewire-0.3-modules libpipewire-0.3-modules-x11 obs-pipewire-audio-capture pipewire-alsa pipewire-audio pipewire-audio-client-libraries pipewire-bin pipewire-jack pipewire-libcamera pipewire-pulse pipewire-v4l2 vlc-plugin-pipewire libwireplumber-0.5-0 wireplumber bluez bluez-alsa-utils bluez-firmware bluez-obexd bluez-tools libasound2-plugin-bluez python3-bluez tlp tlp-rdw geoclue-2.0 tree curl wget jq tcpdump ffmpeg zstd git python3 python3-venv pypy3 pypy3-venv nodejs npm gh adb virt-manager fonts-noto-core fonts-noto-color-emoji fonts-atkinson-hyperlegible fonts-inter fonts-jetbrains-mono firmware-intel-graphics firmware-intel-misc firmware-intel-sound intel-media-va-driver intel-media-va-driver-non-free intel-microcode intel-hdcp libxcb-xinerama0 libxcb-cursor0 libnss3 flatpak flatpak-xdg-utils gir1.2-flatpak-1.0 libflatpak0 lxpolkit polkitd blueman libvulkan1 mesa-vulkan-drivers
 }
 
 install_network_manager() {
@@ -84,6 +84,26 @@ enable_system_services() {
 
 
 sudo apt install git && git clone https://github.com/lowerflatcase/backups.git && cd backups/scripts/
+
+cat << 'EOF' >> ~/.bash_profile
+
+if [ "$(tty)" = "/dev/tty1" ]; then
+    read -p "Start Sway? [Y/n]: " -r REPLY
+    echo
+    if [[ ${REPLY:-Y} =~ ^[Yy]$ ]]; then
+        export XDG_CURRENT_DESKTOP="sway:wlroots"
+        exec dbus-run-session sway
+    fi
+fi
+
+export MOZ_ENABLE_WAYLAND=1
+
+export QT_QPA_PLATFORM=wayland
+export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+
+EOF
+
+sudo cp config-sway ~/.config/sway/config
 
 enable_i386_architecture
 install_local_deb_packages
