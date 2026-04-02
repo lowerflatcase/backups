@@ -60,7 +60,7 @@ setup_virtualization() {
 }
 
 install_additional_packages() {
-    sudo apt-get install -y brave-browser codium syncthing proton-vpn-gnome-desktop code
+    sudo apt-get install -y brave-browser syncthing proton-vpn-gnome-desktop code
 }
 
 install_flatpak_packages() {
