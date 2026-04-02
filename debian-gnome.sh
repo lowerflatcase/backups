@@ -84,7 +84,14 @@ setup_git_configuration() {
 }
 
 clone_repo(){
-    sudo apt install -y git && git clone https://github.com/lowerflatcase/backups.git && cd backups/scripts/
+    sudo apt install -y git
+    
+    if [ -d "scripts" ]; then
+        cd scripts/
+    else
+        git clone https://github.com/lowerflatcase/backups.git
+        cd backups/scripts/
+    fi
 }
 
 pin_vscode_repo() {
