@@ -1,7 +1,0 @@
-on-button-middle=exec makoctl menu -n "$id" -- fuzzel --dmenu -p 'Select action: '
-
-font=Inter 11
-icons=0
-history=0
-
-group-by=app-name

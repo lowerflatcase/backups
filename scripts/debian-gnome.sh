@@ -15,7 +15,7 @@ enable_i386_architecture() {
 }
 
 install_base_packages() {
-    sudo apt update && sudo apt install -y adb curl ffmpeg flatpak fonts-atkinson-hyperlegible fonts-inter fonts-jetbrains-mono fonts-noto-color-emoji fonts-noto-core gh git gnome-software-plugin-flatpak libflatpak0 libnotify-bin libnotify4 libnss3 libxcb-cursor0 libxcb-xinerama0 nodejs npm pypy3 pypy3-venv python3 python3-venv tcpdump tlp tlp-rdw tree virt-manager wget zstd && sudo systemctl enable tlp
+    sudo apt update && sudo apt install -y adb curl ffmpeg flatpak flatpak-xdg-utils gir1.2-flatpak-1.0 libflatpak0 fonts-atkinson-hyperlegible fonts-inter fonts-jetbrains-mono fonts-noto-color-emoji fonts-noto-core gh git gnome-software-plugin-flatpak libnotify-bin libnotify4 libnss3 libxcb-cursor0 libxcb-xinerama0 nodejs npm pypy3 pypy3-venv python3 python3-venv tcpdump tlp tlp-rdw tree virt-manager wget zstd
 }
 
 restore_grub_configuration() {
@@ -59,7 +59,7 @@ install_additional_packages() {
 }
 
 install_flatpak_packages() {
-    flatpak install -y flathub org.kde.kdenlive
+    flatpak install -y flathub org.kde.kdenlive md.obsidian.Obsidian io.mrarm.mcpelauncher
 }
 
 restore_vscodium_configuration() {
@@ -67,7 +67,7 @@ restore_vscodium_configuration() {
 }
 
 restore_tlp_configuration() {
-    sudo cp backup-tlp /etc/tlp.conf
+    sudo cp backup-tlp /etc/tlp.conf; sudo systemctl enable tlp
 }
 
 rebuild_font_cache() {
@@ -78,29 +78,34 @@ setup_git_configuration() {
     git config --global init.defaultBranch main && git config --global user.name "Muhammad Danish" && git config --global user.email "ahdimsun@gmail.com"
 }
 
-enable_i386_architecture
-remove_bloat_packages
-restore_grub_configuration
-install_battery_alert_service
-install_local_deb_packages
+clone_repo(){
+    sudo apt install git && git clone https://github.com/lowerflatcase/backups.git && cd backups/scripts/
+}
 
-install_base_packages
+
+
+clone_repo
+
+enable_i386_architecture
+install_local_deb_packages
+restore_grub_configuration
+setup_git_configuration
+install_battery_alert_service
 
 add_repo_brave_browser
 add_repo_vscodium
 add_repo_syncthing
 add_repo_flathub
-
 apt_system_refresh
-
+install_base_packages
+install_anki_package
 install_additional_packages
 install_flatpak_packages
 
-install_anki_package
 restore_vscodium_configuration
 restore_tlp_configuration
 setup_virtualization
-setup_git_configuration
-rebuild_font_cache
 
+remove_bloat_packages
+rebuild_font_cache
 apt_system_refresh

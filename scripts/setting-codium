@@ -18,9 +18,6 @@
 
     "workbench.editor.empty.hint": "hidden",
     "workbench.iconTheme": "vs-minimal",
-    "workbench.colorTheme": "Abyss",
-    "workbench.preferredDarkColorTheme": "Monokai Dimmed",
-    "workbench.preferredLightColorTheme": "Quiet Light",
 
     "window.menuStyle": "native",
     "window.titleBarStyle": "native",
@@ -31,31 +28,19 @@
         "workbench.startupEditor",
         "window.newWindowProfile",
         "window.autoDetectColorScheme",
-
         "security.workspace.trust.enabled",
         "security.workspace.trust.banner",
         "security.workspace.trust.startupPrompt",
-
         "editor.fontFamily",
         "editor.fontSize",
         "editor.wordWrap",
-
         "git.autofetch",
         "git.confirmSync",
-
         "explorer.confirmDelete",
-
         "workbench.editor.empty.hint",
         "workbench.iconTheme",
-        "workbench.colorTheme",
-        "workbench.preferredDarkColorTheme",
-        "workbench.preferredLightColorTheme",
-
         "window.menuStyle",
         "window.titleBarStyle",
-
-        "terminal.integrated.minimumContrastRatio",
-        "window.zoomLevel"
-    ],
-    "window.zoomLevel": 2
+        "terminal.integrated.minimumContrastRatio"
+    ]
 }
