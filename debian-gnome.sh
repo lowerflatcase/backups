@@ -42,9 +42,8 @@ add_repo_flathub() {
     flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 }
 
-add_repo_vscode(){
-    wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo tee /usr/share/keyrings/microsoft.gpg > /dev/null
-    echo "deb [arch=amd64,arm64,armhf signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/code stable main" | sudo tee /etc/apt/sources.list.d/vscode.list
+add_repo_vscodium(){
+    wget -qO- https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg | gpg --dearmor | sudo dd of=/usr/share/keyrings/vscodium-archive-keyring.gpg && echo -e 'Types: deb\nURIs: https://download.vscodium.com/debs\nSuites: vscodium\nComponents: main\nArchitectures: amd64 arm64\nSigned-by: /usr/share/keyrings/vscodium-archive-keyring.gpg' | sudo tee /etc/apt/sources.list.d/vscodium.sources >/dev/null
 }
 
 install_anki_package() {
@@ -60,7 +59,7 @@ setup_virtualization() {
 }
 
 install_additional_packages() {
-    sudo apt-get install -y brave-browser syncthing proton-vpn-gnome-desktop code
+    sudo apt-get install -y brave-browser syncthing proton-vpn-gnome-desktop codium
 }
 
 install_flatpak_packages() {
