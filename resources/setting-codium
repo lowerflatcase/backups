@@ -1,0 +1,46 @@
+{
+    "workbench.startupEditor": "none",
+    "window.newWindowProfile": "Default",
+    "window.autoDetectColorScheme": true,
+
+    "security.workspace.trust.enabled": false,
+    "security.workspace.trust.banner": "always",
+    "security.workspace.trust.startupPrompt": "always",
+
+    "editor.fontFamily": "'JetBrains Mono', monospace",
+    "editor.fontSize": 20,
+    "editor.wordWrap": "on",
+
+    "git.autofetch": true,
+    "git.confirmSync": false,
+
+    "explorer.confirmDelete": false,
+
+    "workbench.editor.empty.hint": "hidden",
+    "workbench.iconTheme": "vs-minimal",
+
+    "window.menuStyle": "native",
+    "window.titleBarStyle": "native",
+
+    "terminal.integrated.minimumContrastRatio": 7,
+
+    "workbench.settings.applyToAllProfiles": [
+        "workbench.startupEditor",
+        "window.newWindowProfile",
+        "window.autoDetectColorScheme",
+        "security.workspace.trust.enabled",
+        "security.workspace.trust.banner",
+        "security.workspace.trust.startupPrompt",
+        "editor.fontFamily",
+        "editor.fontSize",
+        "editor.wordWrap",
+        "git.autofetch",
+        "git.confirmSync",
+        "explorer.confirmDelete",
+        "workbench.editor.empty.hint",
+        "workbench.iconTheme",
+        "window.menuStyle",
+        "window.titleBarStyle",
+        "terminal.integrated.minimumContrastRatio"
+    ]
+}

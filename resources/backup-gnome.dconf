@@ -1,0 +1,153 @@
+[org/freedesktop/tracker/miner/files]
+index-recursive-directories=['&DOCUMENTS', '&MUSIC', '&PICTURES', '&VIDEOS', '/home/danish/DCIM', '/home/danish/Recordings']
+
+[org/gnome/TextEditor]
+highlight-current-line=true
+restore-session=false
+show-line-numbers=true
+show-map=true
+
+[org/gnome/desktop/a11y/magnifier]
+lens-mode=true
+mag-factor=3.0
+
+[org/gnome/desktop/app-folders]
+folder-children=['System', 'Utilities']
+
+[org/gnome/desktop/app-folders/folders/System]
+apps=['nm-connection-editor.desktop', 'org.gnome.Nautilus.desktop', 'im-config.desktop', 'org.gnome.Settings.desktop', 'org.gnome.Software.desktop', 'org.gnome.Terminal.desktop', 'org.gnome.tweaks.desktop']
+name='X-GNOME-Shell-System.directory'
+translate=true
+
+[org/gnome/desktop/app-folders/folders/Utilities]
+apps=['org.gnome.Snapshot.desktop', 'org.gnome.Evince.desktop', 'org.gnome.FileRoller.desktop', 'org.gnome.font-viewer.desktop', 'org.gnome.Loupe.desktop', 'org.gnome.TextEditor.desktop']
+name='X-GNOME-Shell-Utilities.directory'
+translate=true
+
+[org/gnome/desktop/break-reminders]
+selected-breaks=@as []
+
+[org/gnome/desktop/break-reminders/eyesight]
+play-sound=true
+
+[org/gnome/desktop/break-reminders/movement]
+duration-seconds=uint32 300
+interval-seconds=uint32 1800
+play-sound=true
+
+[org/gnome/desktop/calendar]
+show-weekdate=false
+
+[org/gnome/desktop/datetime]
+automatic-timezone=true
+
+[org/gnome/desktop/input-sources]
+sources=[('xkb', 'in+eng')]
+xkb-options=['numpad:mac']
+
+[org/gnome/desktop/interface]
+accent-color='blue'
+clock-show-weekday=true
+color-scheme='prefer-dark'
+document-font-name='Atkinson Hyperlegible 12'
+font-antialiasing='rgba'
+font-name='Inter 12'
+monospace-font-name='JetBrains Mono 12'
+show-battery-percentage=true
+
+[org/gnome/desktop/media-handling]
+autorun-never=true
+autorun-x-content-ignore=@as []
+autorun-x-content-open-folder=@as []
+autorun-x-content-start-app=['x-content/ostree-repository']
+
+[org/gnome/desktop/peripherals/keyboard]
+numlock-state=false
+
+[org/gnome/desktop/peripherals/mouse]
+accel-profile='default'
+
+[org/gnome/desktop/peripherals/touchpad]
+disable-while-typing=true
+two-finger-scrolling-enabled=true
+
+[org/gnome/desktop/privacy]
+old-files-age=uint32 0
+recent-files-max-age=1
+remove-old-temp-files=true
+remove-old-trash-files=true
+
+[org/gnome/desktop/screen-time-limits]
+daily-limit-enabled=false
+daily-limit-seconds=uint32 60
+grayscale=false
+
+[org/gnome/desktop/session]
+idle-delay=uint32 0
+
+[org/gnome/desktop/sound]
+event-sounds=false
+theme-name='freedesktop'
+
+[org/gnome/desktop/wm/preferences]
+action-middle-click-titlebar='minimize'
+button-layout='close:appmenu'
+focus-mode='click'
+num-workspaces=1
+resize-with-right-button=true
+visual-bell=false
+visual-bell-type='frame-flash'
+
+[org/gnome/mutter]
+dynamic-workspaces=true
+workspaces-only-on-primary=true
+
+[org/gnome/nautilus/icon-view]
+captions=['size', 'detailed_type', 'none']
+
+[org/gnome/nautilus/list-view]
+default-visible-columns=['name', 'size', 'detailed_type']
+default-zoom-level='small'
+use-tree-view=true
+
+[org/gnome/nautilus/preferences]
+date-time-format='detailed'
+default-folder-viewer='list-view'
+migrated-gtk-settings=true
+recursive-search='always'
+show-create-link=true
+show-delete-permanently=true
+show-directory-item-counts='always'
+show-image-thumbnails='always'
+
+[org/gnome/settings-daemon/plugins/color]
+night-light-enabled=true
+night-light-schedule-automatic=true
+night-light-temperature=uint32 3200
+
+[org/gnome/settings-daemon/plugins/power]
+idle-dim=false
+power-button-action='interactive'
+
+[org/gnome/shell]
+app-picker-layout=[{'System': <{'position': <0>}>, 'Utilities': <{'position': <1>}>, 'syncthing-ui.desktop': <{'position': <2>}>}]
+favorite-apps=['anki.desktop', 'brave-browser.desktop', 'codium.desktop', 'org.kde.kdenlive.desktop', 'md.obsidian.Obsidian.desktop', 'proton.vpn.app.gtk.desktop', 'syncthing-start.desktop', 'virt-manager.desktop', 'vlc.desktop']
+last-selected-power-profile='power-saver'
+
+[org/gnome/shell/app-switcher]
+current-workspace-only=true
+
+[org/gnome/system/location]
+enabled=true
+
+[org/gnome/terminal/legacy]
+new-tab-position='next'
+new-terminal-mode='tab'
+
+[org/gnome/terminal/legacy/keybindings]
+select-all='<Primary><Shift>a'
+
+[org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
+default-size-columns=75
+default-size-rows=25
+scrollback-unlimited=true
