@@ -78,12 +78,12 @@ install_additional_packages() {
 }
 
 install_flatpak_packages() {
-    flatpak install -y flathub org.kde.kdenlive md.obsidian.Obsidian
+    flatpak install -y flathub org.kde.kdenlive
 }
 
 restore_codium_configuration(){
     mkdir -p ~/.config/VSCodium/User && cp -f "$RESOURCES/setting-codium" ~/.config/VSCodium/User/settings.json
-}
+
 
 restore_tlp_configuration() {
     sudo cp "$RESOURCES/backup-tlp" /etc/tlp.conf && sudo systemctl enable tlp
