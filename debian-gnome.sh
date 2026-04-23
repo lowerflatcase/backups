@@ -78,7 +78,7 @@ install_additional_packages() {
 }
 
 install_flatpak_packages() {
-    flatpak install -y flathub org.kde.kdenlive md.obsidian.Obsidian io.mrarm.mcpelauncher
+    flatpak install -y flathub org.kde.kdenlive md.obsidian.Obsidian
 }
 
 restore_codium_configuration(){
