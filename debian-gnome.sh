@@ -83,7 +83,7 @@ install_flatpak_packages() {
 
 restore_codium_configuration(){
     mkdir -p ~/.config/VSCodium/User && cp -f "$RESOURCES/setting-codium" ~/.config/VSCodium/User/settings.json
-
+}
 
 restore_tlp_configuration() {
     sudo cp "$RESOURCES/backup-tlp" /etc/tlp.conf && sudo systemctl enable tlp
