@@ -4,7 +4,7 @@ set -euo pipefail
 
 sudo -v
 
-exec > >(tee -a "$HOME/setup.log" >/dev/null) 2> >(tee -a "$HOME/setup.log" >&2)
+exec > /dev/null
 
 REPO_DIR="$HOME/backups"
 RESOURCES="$HOME/backups/resources"
@@ -20,11 +20,7 @@ remove_bloat_packages() {
 }
 
 setup_bash_aliases() {
-    local alias_line="alias update='sudo -v && sudo apt-get update && sudo apt-get dist-upgrade -y && sudo apt-get autoremove --purge -y && sudo apt-get autoclean'"
-    
-    if ! grep -qF "$alias_line" "$HOME/.bashrc"; then
-        echo -e "\n# Custom Aliases\n$alias_line" >> "$HOME/.bashrc"
-    fi
+    grep -q "^alias update=" ~/.bashrc || echo "alias update='sudo -v && sudo apt-get update && sudo apt-get dist-upgrade -y && sudo apt-get autoremove --purge -y && sudo apt-get autoclean'" >> ~/.bashrc
 }
 
 apt_system_refresh() {
@@ -40,7 +36,9 @@ install_base_packages() {
 }
 
 restore_grub_configuration() {
-    sudo chmod -x /etc/grub.d/05_debian_theme && sudo cp "$RESOURCES/backup-grub" /etc/default/grub && sudo update-grub
+    [ -f /etc/grub.d/05_debian_theme ] && sudo chmod -x /etc/grub.d/05_debian_theme
+    # sudo cp "$RESOURCES/backup-grub" /etc/default/grub
+    sudo update-grub
 }
 
 install_battery_alert_service() {
@@ -55,22 +53,16 @@ add_repo_syncthing() {
     sudo mkdir -p /etc/apt/keyrings && sudo curl -L -o /etc/apt/keyrings/syncthing-archive-keyring.gpg https://syncthing.net/release-key.gpg && echo "deb [signed-by=/etc/apt/keyrings/syncthing-archive-keyring.gpg] https://apt.syncthing.net/ syncthing stable-v2" | sudo tee /etc/apt/sources.list.d/syncthing.list
 }
 
+add_repo_protonvpn() {
+    wget https://repo.protonvpn.com/debian/dists/stable/main/binary-all/protonvpn-stable-release_1.0.8_all.deb && sudo dpkg -i ./protonvpn-stable-release_1.0.8_all.deb
+}
+
 add_repo_flathub() {
     flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 }
 
-install_anki_package() {
-    tar --use-compress-program=unzstd -xf "$RESOURCES"/anki-*.tar.zst && cd anki-*/ && sudo mkdir -p /root/.config && sudo ./install.sh && cd - && rm -rf anki-*/
-}
-
-install_local_deb_packages() {
-    if ls "$RESOURCES"/*.deb 1> /dev/null 2>&1; then
-        sudo apt-get install "$RESOURCES"/*.deb -y
-    fi
-}
-
 setup_virtualization() {
-    sudo usermod -aG libvirt,kvm "$USER" && sudo systemctl enable --now libvirtd && sudo virsh net-start default && sudo virsh net-autostart default
+    sudo usermod -aG libvirt,kvm "$USER" && sudo systemctl enable --now libvirtd && { sudo virsh net-start default || true; } && sudo virsh net-autostart default
 }
 
 install_additional_packages() {
@@ -78,7 +70,7 @@ install_additional_packages() {
 }
 
 install_flatpak_packages() {
-    flatpak install -y flathub org.kde.kdenlive
+    flatpak install -y flathub org.kde.kdenlive net.ankiweb.Anki md.obsidian.Obsidian
 }
 
 restore_codium_configuration(){
@@ -108,19 +100,19 @@ install_base_packages
 setup_git_configuration
 clone_repository
 
-install_local_deb_packages
 add_repo_brave_browser
 add_repo_syncthing
 add_repo_flathub
 add_repo_codium
+add_repo_protonvpn
 apt_system_refresh
 
-install_anki_package
 install_additional_packages
 install_flatpak_packages
 
 restore_tlp_configuration
 restore_codium_configuration
+restore_grub_configuration
 setup_virtualization
 
 install_battery_alert_service
