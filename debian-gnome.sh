@@ -108,7 +108,7 @@ add_repo_syncthing() {
 
 add_repo_protonvpn() {
     echo -e "${GREEN}===> Adding ProtonVPN repo...${NC}" >&2
-    (cd "$RESOURCES" && wget https://repo.protonvpn.com/debian/dists/stable/main/binary-all/protonvpn-stable-release_1.0.8_all.deb && sudo dpkg -i ./protonvpn-stable-release_1.0.8_all.deb)
+    (cd "$RESOURCES" && wget -qO protonvpn-stable-release_1.0.8_all.deb https://repo.protonvpn.com/debian/dists/stable/main/binary-all/protonvpn-stable-release_1.0.8_all.deb && sudo dpkg -i ./protonvpn-stable-release_1.0.8_all.deb)
 }
 
 add_repo_flathub() {
@@ -118,7 +118,8 @@ add_repo_flathub() {
 
 setup_virtualization() {
     echo -e "${GREEN}===> Setting up virtualization...${NC}" >&2
-    sudo usermod -aG libvirt,kvm "$USER" && sudo systemctl enable --now libvirtd && sudo virsh net-autostart default && sudo virsh net-start default || true
+    sudo usermod -aG libvirt,kvm "$USER" && sudo systemctl enable --now libvirtd && sudo virsh net-autostart default || true
+    sudo virsh net-info default | grep -q 'Active:.*yes' || sudo virsh net-start default || true
 }
 
 install_additional_packages() {
