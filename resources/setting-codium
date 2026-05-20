@@ -1,0 +1,38 @@
+{
+    "editor.fontFamily": "'Noto Sans Mono', monospace",
+    "editor.fontSize": 18,
+    "editor.wordWrap": "on",
+
+    "window.newWindowProfile": "Default",
+    "window.menuStyle": "native",
+    "window.titleBarStyle": "native",
+    "window.autoDetectColorScheme": true,
+
+    "security.workspace.trust.enabled": false,
+    "security.workspace.trust.banner": "always",
+    "security.workspace.trust.startupPrompt": "always",
+
+    "terminal.integrated.minimumContrastRatio": 1,
+
+    "workbench.startupEditor": "none",
+    "workbench.preferredDarkColorTheme": "Monokai Pro (Filter Ristretto)",
+    "workbench.preferredLightColorTheme": "Monokai Pro Light (Filter Sun)",
+    "workbench.iconTheme": "Monokai Pro Icons",
+    "workbench.settings.applyToAllProfiles": [
+        "editor.fontFamily",
+        "editor.fontSize",
+        "editor.wordWrap",
+        "window.newWindowProfile",
+        "window.menuStyle",
+        "window.titleBarStyle",
+        "window.autoDetectColorScheme",
+        "security.workspace.trust.enabled",
+        "security.workspace.trust.banner",
+        "security.workspace.trust.startupPrompt",
+        "terminal.integrated.minimumContrastRatio",
+        "workbench.startupEditor",
+        "workbench.preferredDarkColorTheme",
+        "workbench.preferredLightColorTheme",
+        "workbench.iconTheme"
+    ]
+}
