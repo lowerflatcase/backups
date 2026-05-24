@@ -1,0 +1,139 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "scrollbar": {
+    "git_diff": true
+  },
+  "soft_wrap": "editor_width",
+  "semantic_tokens": "off",
+  "prettier": {
+    "allowed": false
+  },
+  "diagnostics": {
+    "inline": {
+      "enabled": true
+    }
+  },
+  "which_key": {
+    "enabled": false
+  },
+  "cursor_shape": "bar",
+  "on_last_window_closed": "quit_app",
+  "when_closing_with_no_tabs": "keep_window_open",
+  "edit_predictions": {
+
+  },
+  "status_bar": {
+    "cursor_position_button": true,
+    "line_endings_button": true,
+    "show_active_file": true
+  },
+  "title_bar": {
+    "show_project_items": true,
+    "show_onboarding_banner": false,
+    "show_user_menu": true,
+    "show_sign_in": false,
+    "show_menus": true,
+    "button_layout": "platform_default",
+    "show_branch_status_icon": true
+  },
+  "tab_bar": {
+    "show_pinned_tabs_in_separate_row": true,
+    "show": true
+  },
+  "preview_tabs": {
+    "enable_preview_multibuffer_from_code_navigation": true,
+    "enable_preview_from_file_finder": true
+  },
+  "tabs": {
+    "close_position": "left",
+    "file_icons": true,
+    "git_status": true,
+    "show_diagnostics": "all",
+    "activate_on_close": "neighbour"
+  },
+  "window_decorations": "client",
+  "git_panel": {
+    "diff_stats": true,
+    "folder_icons": true,
+    "button": true,
+    "status_style": "label_color",
+    "sort_by_path": true,
+    "collapse_untracked_diff": false,
+    "tree_view": false,
+    "file_icons": true,
+    "show_count_badge": true
+  },
+  "project_panel": {
+    "git_status": true,
+    "git_status_indicator": true,
+    "diagnostic_badges": true,
+    "bold_folder_labels": true,
+    "dock": "left"
+  },
+  "outline_panel": {
+    "git_status": true,
+    "button": false
+  },
+  "collaboration_panel": {
+    "button": false
+  },
+  "agent": {
+    "button": false,
+    "favorite_models": [],
+    "model_parameters": []
+  },
+  "cli_default_open_behavior": "new_window",
+  "session": {
+    "trust_all_worktrees": true
+  },
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
+  },
+  "rounded_selection": false,
+  "cursor_blink": false,
+  "text_rendering_mode": "subpixel",
+  "terminal": {
+    "show_count_badge": true,
+    "scrollbar": {
+      "show": "auto"
+    },
+    "toolbar": {
+      "breadcrumbs": false
+    },
+    "keep_selection_on_copy": false,
+    "blinking": "off"
+  },
+  "icon_theme": {
+    "mode": "system",
+    "light": "Zed (Default)",
+    "dark": "Zed (Default)"
+  },
+  "base_keymap": "VSCode",
+  "git": {
+    "enable_diff": true,
+    "enable_status": true,
+    "git_gutter": "tracked_files",
+    "path_style": "file_path_first",
+    "hunk_style": "unstaged_hollow",
+    "inline_blame": {
+      "show_commit_summary": true
+    }
+  },
+  "disable_ai": true,
+  "proxy": "",
+  "ui_font_size": 16,
+  "buffer_font_size": 15,
+  "theme": {
+    "mode": "system",
+    "light": "Gruvbox Light Hard",
+    "dark": "Gruvbox Dark Hard",
+  },
+}
