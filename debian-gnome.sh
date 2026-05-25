@@ -120,7 +120,7 @@ setup_virtualization() {
 
 install_additional_packages() {
     echo -e "${GREEN}===> Installing additional packages (Brave Origin Nightly, Syncthing, etc)...${NC}" >&2
-    sudo apt-get install -y brave-origin-nightly syncthing
+    sudo apt-get install -y brave-origin-nightly syncthing gh
 }
 
 install_flatpak_packages() {
