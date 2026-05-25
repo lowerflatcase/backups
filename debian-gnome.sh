@@ -120,7 +120,7 @@ setup_virtualization() {
 
 install_additional_packages() {
     echo -e "${GREEN}===> Installing additional packages (Brave Origin Beta, Syncthing, etc)...${NC}" >&2
-    sudo apt-get install -y brave-origin-nightly syncthing proton-vpn-gnome-desktop codium
+    sudo apt-get install -y brave-origin-nightly syncthing proton-vpn-gnome-desktop
 }
 
 install_flatpak_packages() {
