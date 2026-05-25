@@ -84,7 +84,7 @@ enable_i386_architecture() {
 
 install_base_packages() {
     echo -e "${GREEN}===> Installing base packages...${NC}" >&2
-    sudo apt-get update && sudo apt-get install -y adb curl vlc ffmpeg flatpak flatpak-xdg-utils gir1.2-flatpak-1.0 libflatpak0 fonts-noto-color-emoji fonts-noto-core gh git gnome-software-plugin-flatpak libnotify-bin libnotify4 nodejs npm pypy3 pypy3-venv python3 python3-venv tcpdump tlp tlp-rdw tree virt-manager zstd wget gpg
+    sudo apt-get update && sudo apt-get install -y adb curl vlc ffmpeg flatpak flatpak-xdg-utils gir1.2-flatpak-1.0 libflatpak0 fonts-noto-color-emoji fonts-noto-core gh git gnome-software-plugin-flatpak libnotify-bin libnotify4 nodejs pypy3 pypy3-venv python3 python3-venv tcpdump tlp tlp-rdw tree virt-manager zstd wget gpg
 }
 
 restore_grub_configuration() {
@@ -93,12 +93,8 @@ restore_grub_configuration() {
 }
 
 add_repo_brave_browser() {
-    echo -e "${GREEN}===> Adding Brave Origin Beta repository...${NC}" >&2
-
-    sudo curl -fsSLo /usr/share/keyrings/brave-browser-beta-archive-keyring.gpg \
-        https://brave-browser-apt-beta.s3.brave.com/brave-browser-beta-archive-keyring.gpg && \
-    sudo curl -fsSLo /etc/apt/sources.list.d/brave-browser-beta.sources \
-        https://brave-browser-apt-beta.s3.brave.com/brave-browser.sources
+    echo -e "${GREEN}===> Adding Brave Nightly repository...${NC}" >&2
+    sudo curl -fsSLo /usr/share/keyrings/brave-browser-nightly-archive-keyring.gpg https://brave-browser-apt-nightly.s3.brave.com/brave-browser-nightly-archive-keyring.gpg && sudo curl -fsSLo /etc/apt/sources.list.d/brave-browser-nightly.sources https://brave-browser-apt-nightly.s3.brave.com/brave-browser.sources
 }
 
 add_repo_syncthing() {
@@ -124,7 +120,7 @@ setup_virtualization() {
 
 install_additional_packages() {
     echo -e "${GREEN}===> Installing additional packages (Brave Origin Beta, Syncthing, etc)...${NC}" >&2
-    sudo apt-get install -y brave-origin-beta syncthing proton-vpn-gnome-desktop codium
+    sudo apt-get install -y brave-origin-nightly syncthing proton-vpn-gnome-desktop codium
 }
 
 install_flatpak_packages() {
@@ -147,9 +143,9 @@ setup_git_configuration() {
     git config --global init.defaultBranch main && git config --global user.name "$GIT_NAME" && git config --global user.email "$GIT_EMAIL"
 }
 
-add_repo_codium() {
-    echo -e "${GREEN}===> Adding VSCodium repository...${NC}" >&2
-    wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg | gpg --dearmor | sudo dd of=/usr/share/keyrings/vscodium-archive-keyring.gpg && echo -e 'Types: deb\nURIs: https://download.vscodium.com/debs\nSuites: vscodium\nComponents: main\nArchitectures: amd64 arm64\nSigned-by: /usr/share/keyrings/vscodium-archive-keyring.gpg' | sudo tee /etc/apt/sources.list.d/vscodium.sources
+add_zed() {
+    echo -e "${GREEN}===> Adding Zed...${NC}" >&2
+    mkdir -p ~/.local/{bin,share/applications} && curl -fL "https://zed.dev/api/releases/stable/latest/zed-linux-x86_64.tar.gz" -o /tmp/zed.tar.gz && rm -rf ~/.local/zed.app && tar -xzf /tmp/zed.tar.gz -C ~/.local/ && ln -sf ~/.local/zed.app/bin/zed ~/.local/bin/zed && cp ~/.local/zed.app/share/applications/dev.zed.Zed.desktop ~/.local/share/applications/ && sed -i "s|Icon=zed|Icon=$HOME/.local/zed.app/share/icons/hicolor/512x512/apps/zed.png|g; s|Exec=zed|Exec=$HOME/.local/zed.app/bin/zed|g" ~/.local/share/applications/dev.zed.Zed.desktop
 }
 
 restore_gnome_settings() {
@@ -166,12 +162,12 @@ clone_repository
 
 add_repo_brave_browser
 add_repo_syncthing
-add_repo_codium
 add_repo_protonvpn
 add_repo_flathub
 
 apt_system_refresh
 install_additional_packages
+add_zed
 install_flatpak_packages
 
 restore_codium_configuration
