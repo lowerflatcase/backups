@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+set -eo pipefail
 
 GREEN='\033[0;32m'
 NC='\033[0m'
