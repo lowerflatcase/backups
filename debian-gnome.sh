@@ -119,8 +119,8 @@ setup_virtualization() {
 }
 
 install_additional_packages() {
-    echo -e "${GREEN}===> Installing additional packages (Brave Origin Beta, Syncthing, etc)...${NC}" >&2
-    sudo apt-get install -y brave-origin-nightly syncthing proton-vpn-gnome-desktop
+    echo -e "${GREEN}===> Installing additional packages (Brave Origin Nightly, Syncthing, etc)...${NC}" >&2
+    sudo apt-get install -y brave-origin-nightly syncthing proton-vpn-cli
 }
 
 install_flatpak_packages() {
@@ -170,7 +170,7 @@ install_additional_packages
 add_zed
 install_flatpak_packages
 
-restore_codium_configuration
+#restore_codium_configuration
 restore_grub_configuration
 restore_gnome_settings
 setup_virtualization
