@@ -70,7 +70,7 @@ ROOT_PASS="$ROOT_PASS"
 USER_PASS="$USER_PASS"
 EOF
 
-    arch-chroot /mnt env ARCH_CHROOT=1 bash -c "curl -fsSL https://raw.githubusercontent.com/lowerflatcase/backups/main/arch-sway.sh | bash"
+    arch-chroot /mnt env ARCH_CHROOT=1 bash -c "curl -fsSL https://lowerflatcase.me/backups/arch-sway.sh | bash"
 
 else
 
