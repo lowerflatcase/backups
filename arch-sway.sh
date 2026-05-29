@@ -27,12 +27,10 @@ if [[ "$INSIDE_CHROOT" == false ]]; then
     read USERNAME </dev/tty
     
     echo -n "Root Password: " >/dev/tty
-    read -s ROOT_PASS </dev/tty
-    echo >/dev/tty
+    read ROOT_PASS </dev/tty
     
     echo -n "User Password: " >/dev/tty
-    read -s USER_PASS </dev/tty
-    echo >/dev/tty
+    read USER_PASS </dev/tty
 
     umount -R /mnt 2>/dev/null || true
     swapoff -a 2>/dev/null || true
