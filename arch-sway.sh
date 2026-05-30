@@ -32,6 +32,9 @@ if [[ "$INSIDE_CHROOT" == false ]]; then
     echo -n "User Password: " >/dev/tty
     read USER_PASS </dev/tty
 
+    echo "WARNING: Disk $DISK will be wiped. Press ENTER to continue or CTRL+C to cancel." >/dev/tty
+    read </dev/tty
+
     umount -R /mnt 2>/dev/null || true
     swapoff -a 2>/dev/null || true
 
@@ -57,7 +60,7 @@ if [[ "$INSIDE_CHROOT" == false ]]; then
     mkdir -p /mnt/boot
     mount "$EFI_PART" /mnt/boot
 
-    pacstrap -K /mnt base linux linux-firmware networkmanager sudo nano intel-ucode
+    pacstrap -K /mnt base linux linux-firmware networkmanager sudo nano intel-ucode </dev/tty
     
     genfstab -U /mnt > /mnt/etc/fstab
 
@@ -111,7 +114,7 @@ initrd /initramfs-linux.img
 options root=PARTUUID=$ROOT_PARTUUID rw
 EOF
 
-    pacman -S --noconfirm --needed sway foot mesa vulkan-intel intel-media-driver git base-devel
+    pacman -S --needed hyprland sway foot mesa vulkan-intel intel-media-driver git base-devel </dev/tty
 
     sudo -u "$USERNAME" bash -c "
         cd /home/$USERNAME
@@ -119,13 +122,16 @@ EOF
             rm -rf yay
             git clone https://aur.archlinux.org/yay.git
             cd yay
-            makepkg -si --noconfirm
+            makepkg -si </dev/tty
             cd ..
             rm -rf yay
         fi
-        yay -S --noconfirm --needed brave-origin-nightly-bin
+        yay -S --needed brave-origin-nightly-bin </dev/tty
         grep -q \"alias sway\" /home/$USERNAME/.bashrc || {
             echo \"alias sway='exec sway'\" >> /home/$USERNAME/.bashrc
+        }
+        grep -q \"alias hyprland\" /home/$USERNAME/.bashrc || {
+            echo \"alias hyprland='exec Hyprland'\" >> /home/$USERNAME/.bashrc
         }
     "
 
