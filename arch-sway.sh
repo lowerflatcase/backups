@@ -118,15 +118,7 @@ EOF
 
     sudo -u "$USERNAME" bash -c "
         cd /home/$USERNAME
-        if ! command -v yay &> /dev/null; then
-            rm -rf yay
-            git clone https://aur.archlinux.org/yay.git
-            cd yay
-            makepkg -si </dev/tty
-            cd ..
-            rm -rf yay
-        fi
-        yay -S --needed brave-origin-nightly-bin </dev/tty
+        curl -fsS https://dl.brave.com/install.sh | FLAVOR=origin CHANNEL=nightly sh </dev/tty
         grep -q \"alias sway\" /home/$USERNAME/.bashrc || {
             echo \"alias sway='exec sway'\" >> /home/$USERNAME/.bashrc
         }
