@@ -136,7 +136,6 @@ clone_repository
 
 add_repo_brave_browser
 add_repo_syncthing
-# add_repo_protonvpn
 add_repo_flathub
 
 apt_system_refresh
