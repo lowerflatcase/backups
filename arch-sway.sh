@@ -114,7 +114,7 @@ initrd /initramfs-linux.img
 options root=PARTUUID=$ROOT_PARTUUID rw
 EOF
 
-    pacman -S --needed hyprland sway foot mesa vulkan-intel intel-media-driver git base-devel </dev/tty
+    pacman -S --needed sway foot mesa vulkan-intel intel-media-driver git base-devel </dev/tty
 
     sudo -u "$USERNAME" bash -c "
         cd /home/$USERNAME
@@ -129,9 +129,6 @@ EOF
         yay -S --needed brave-origin-nightly-bin </dev/tty
         grep -q \"alias sway\" /home/$USERNAME/.bashrc || {
             echo \"alias sway='exec sway'\" >> /home/$USERNAME/.bashrc
-        }
-        grep -q \"alias hyprland\" /home/$USERNAME/.bashrc || {
-            echo \"alias hyprland='exec Hyprland'\" >> /home/$USERNAME/.bashrc
         }
     "
 
