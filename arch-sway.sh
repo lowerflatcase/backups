@@ -60,7 +60,7 @@ if [[ "$INSIDE_CHROOT" == false ]]; then
     mkdir -p /mnt/boot
     mount "$EFI_PART" /mnt/boot
 
-    pacstrap -K /mnt base linux linux-firmware networkmanager sudo nano intel-ucode curl </dev/tty
+    pacstrap -K /mnt base linux linux-firmware networkmanager sudo nano intel-ucode </dev/tty
     
     genfstab -U /mnt > /mnt/etc/fstab
 
@@ -118,7 +118,6 @@ EOF
 
     sudo -u "$USERNAME" bash -c "
         cd /home/$USERNAME
-        curl -fsS https://dl.brave.com/install.sh | FLAVOR=origin CHANNEL=nightly sh
         grep -q \"alias sway\" /home/$USERNAME/.bashrc || {
             echo \"alias sway='exec sway'\" >> /home/$USERNAME/.bashrc
         }
